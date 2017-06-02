@@ -6,30 +6,35 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 19:36:21 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/05/31 20:14:17 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/02 04:21:05 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/ft_ls.h"
+
+static void		ft_fill_fields(t_opt *op)
+{
+	t_direct	*tmp;
+	
+	tmp = op->arg_file;
+	while (tmp)
+	{
+		ft_fields_size(op->arg_file, tmp);
+		tmp = tmp->next;
+	}
+}
 
 void			ft_display_argfiles(t_opt *op)
 {
 	t_direct	*tmp;
 
 	if (op->long_format)
-	{
-		tmp = op->arg_file;
-		while (tmp)
-		{
-			ft_fields_size(op->arg_file, tmp);
-			tmp = tmp->next;
-		}
-	}
+		ft_fill_fields(op);
 	tmp = op->arg_file;
 	while (tmp)
 	{
 		(op->long_format) ? ft_display_long(tmp, op->arg_file, op) :
-								ft_putstr(ft_strrchr(tmp->path, '/') + 1);
+								ft_putstr(tmp->path);
 		if (op->col)
 			ft_putchar('\n');
 		else if (!op->long_format)
@@ -43,5 +48,4 @@ void			ft_display_argfiles(t_opt *op)
 		free(tmp);
 		tmp = tmp->next;
 	}
-
 }

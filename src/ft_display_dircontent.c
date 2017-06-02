@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 23:14:40 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/01 04:30:42 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/02 01:12:21 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,17 @@ void			ft_display_dircontent(t_direct *dir, t_opt *op)
 		return (ft_putendl("FAIL"));
 	}
 	curline = dir->content;
-	curline->next ? ft_display_lst(curline, dir, op) :
-						ft_display_tree(curline, NULL, dir, op);
+/*	if (op->recurs)
+	{
+		while (curline->right)
+			curline = curline->right;
+	}
+	else
+	{
+		while (curline->left)
+		curline = curline->left;
+	}
+*/	(!op->opt_f) ? ft_display_tree(curline, NULL, dir, op) :
+							ft_display_lst(curline, dir, op);
 	ft_del_dir_in_directlst(dir, op);
 }

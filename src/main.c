@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 00:27:42 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/01 04:09:35 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/02 01:44:45 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int				main(int argc, char **argv)
 	{
 		ft_get_dircontent(options->first_d, options);
 		ft_display_dircontent(options->first_d, options);
+//		options->first_d = options->first_d->next;
 	}
 /*	tmp = options->first_d;
 	while (tmp)

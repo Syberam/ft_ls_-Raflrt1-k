@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 22:52:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/01 04:00:34 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/02 06:29:06 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ static void		ft_new_listree_elem(t_direct *daddir, char *new, t_opt *op)
 		curnode = daddir->content;
 	while (curnode->next)
 	{
-	//	ft_putendl("l36");
-	//	ft_putendl(curnode->path);
 		curnode = curnode->next;
 	}
 	curnode->next = new_bud;
@@ -58,53 +56,61 @@ static void		ft_new_bud(t_direct *daddir, char *bud, t_opt *op)
 		daddir->content = new_bud;
 	else
 	{
+		ft_putendl(new_bud->path);
 		curnode = daddir->content;
-		while (42 && curnode)
+		while (curnode)
 		{
-			if (op->time_sort && ft_time_dif(new_bud, curnode) > 0)
+			if (op->time_sort && ft_time_dif(new_bud, curnode) < 0)
 			{
-				ft_putendl(curnode->path);
 				if (!curnode->left)
 				{
+					ft_putstr(new_bud->path);
+					ft_putstr(" put in left of : ");
+					ft_putendl(curnode->path);
 					curnode->left = new_bud;
 					new_bud->relat = curnode;
-					break ;
-				}
-				else
 					curnode = curnode->left;
+				}
+				curnode = curnode->left;
 			}
-			else if (op->time_sort && ft_time_dif(new_bud, curnode) < 0)
+			else if (op->time_sort && ft_time_dif(new_bud, curnode) > 0)
 			{
 				if (!curnode->right)
-				{
+				{	
+					ft_putstr(new_bud->path);
+					ft_putstr(" put in right of : ");
+					ft_putendl(curnode->path);
 					curnode->right = new_bud;
 					new_bud->relat = curnode;
-					break ;
+					curnode = curnode->right;
 				}
-				else
-					curnode = curnode->left;
+				curnode = curnode->right;
 			}
-			else if (ft_strcmp(new_bud->path, curnode->path) > 0) // || <0 ??
+			else if (ft_strcmp(new_bud->path, curnode->path) <= 0) // || <0 ??
 			{
 				if (!curnode->left)
-				{
+				{	
+					ft_putstr(new_bud->path);
+					ft_putstr(" put in left of : ");
+					ft_putendl(curnode->path);
 					curnode->left = new_bud;
 					new_bud->relat = curnode;
-					break ;
-				}
-				else
 					curnode = curnode->left;
+				}
+				curnode = curnode->left;
 			}
 			else
 			{
 				if (!curnode->right)
 				{
+					ft_putstr(new_bud->path);
+					ft_putstr(" put in right of : ");
+					ft_putendl(curnode->path);
 					curnode->right = new_bud;
 					new_bud->relat = curnode;
-					break ;
+					curnode = curnode->right;
 				}
-				else
-					curnode = curnode->left;
+				curnode = curnode->right;
 			}
 		}
 	}
@@ -122,7 +128,6 @@ t_opt			*ft_get_dircontent(t_direct *daddir, t_opt *op)
 		return (op);
 	daddir->ph_lnk = 0;
 	while ((in = readdir(diropen)))
-
 	{
 		path = ft_write_path((char *)daddir->path, in->d_name);
 		op->opt_f ? ft_new_listree_elem(daddir, path, op)

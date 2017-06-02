@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 18:15:06 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/01 01:04:47 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/02 05:44:41 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,28 @@ t_direct		*ft_display_tree(t_direct *node, t_direct *prev, t_direct *dad,
 	t_direct	*tmp;
 	t_direct	*right;
 
+	if (!node)
+		return (prev);
+	//ft_display_indir_node(node, dad, op);
 	if (node->left)
-		prev = ft_put_in_direct_lst(prev, node->left, op);
+		prev = ft_display_tree(prev, node->left, dad, op);
 	ft_display_indir_node(node, dad, op);
 	right = node->right;
-	prev = (op->recurs) ? ft_put_in_direct_lst(prev, node, op) : prev;
-	if (!op->recurs)
+	//prev = (op->recurs) ? ft_put_in_direct_lst(prev, node, op) : prev;
+	/*if (!op->recurs)
 	{
 		free((void *)node->path);
 		free(node);
-	}
+	}*/
 	if (node->right)
 	{
-		tmp = ft_put_in_direct_lst(prev, right, op);
+		//ft_display_indir_node(node, dad, op);
+		tmp = ft_display_tree(prev, right, dad, op);
 		if ((!ft_strcmp(".\0", ft_strrchr(node->path, '/')) &&
 				!ft_strcmp(".\0", ft_strrchr(node->path, '/'))) ||
 					(op->all && ft_strrchr(node->path, '/')[0] != 0))
 			prev = tmp;
 	}
+		//ft_display_indir_node(node, dad, op);
 	return (prev);
 }
