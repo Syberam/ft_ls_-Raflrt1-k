@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/17 23:49:53 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/03 01:52:04 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/03 21:12:44 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,5 @@ void		ft_fields_size(t_direct *daddir, t_direct *cur)
 							size_len : daddir->size_field;
 	daddir->lnk_field = (!daddir->lnk_field || daddir->lnk_field < lnk_len) ?
 							lnk_len : daddir->lnk_field;
+	daddir->ph_lnk += cur->file_stat.st_blocks;
 }
