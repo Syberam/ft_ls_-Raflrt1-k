@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 11:56:34 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/03 01:41:21 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/03 05:17:27 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void						ft_fields_size(t_direct *dir, t_direct *direlem);
 char						*ft_time_for_display(t_stat stat_file, t_opt *ops);
 char						*ft_size_or_minmaj(t_direct *cur);
 void						ft_display_dircontent(t_direct *dir, t_opt *op);
-t_direct					*ft_display_tree(t_direct *node, t_direct *prev,
+void						ft_display_tree(t_direct *node, t_direct *prev,
 													t_direct *dad, t_opt *op);
 t_direct					*ft_display_tree_r(t_direct *node, t_direct *prev,
 													t_direct *dad, t_opt *op);

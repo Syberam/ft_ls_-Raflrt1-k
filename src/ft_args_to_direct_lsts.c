@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 00:17:17 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/01 04:31:40 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/03 06:53:56 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ static void		ft_dir_to_direct(char *new, t_stat stats, t_opt *op)
 	t_direct	*new_dir;
 	t_direct	*tmp;
 
+	op->first_line =  op->first_line == 10 ? 0 : 1;
 	new_dir = ft_memalloc(sizeof(t_direct));
 	new_dir->path = ft_write_path(NULL, new);
 	new_dir->file_stat = stats;

@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:58:01 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/01 02:35:49 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/03 06:45:12 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void			ft_init_opt(t_opt *opts, char **argv)
 	opts->time_sort = 0;
 	opts->err = 0;
 	opts->av_dir = argv + 1;
+	opts->first_line = 10;
 }
 
 static size_t		ft_active_opt_ii(char opt, t_opt *opts)

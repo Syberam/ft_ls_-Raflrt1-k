@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 22:52:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/03 00:38:23 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/03 06:34:59 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,39 +59,11 @@ static void		ft_new_bud(t_direct *daddir, char *bud, t_opt *op)
 		curnode = daddir->content;
 		while (curnode)
 		{
-		if (curnode->left)
-		{
-			ft_putstr("le left de ");
-			ft_putstr(curnode->path);
-			ft_putstr(" --->  ");
-			ft_putendl(curnode->left->path);
-		}
-		if (curnode->right)
-		{
-			ft_putstr("le right de ");
-			ft_putstr(curnode->path);
-			ft_putstr(" --->  ");
-			ft_putendl(curnode->right->path);
-		}	
-	/*		ft_putnbr(curnode->file_stat.st_mtime);
-			ft_putstr(" (");
-			ft_putstr(curnode->path);
-			ft_putstr(")  - ");
-			ft_putnbr(new_bud->file_stat.st_mtime);
-			ft_putstr(" (");
-			ft_putstr(new_bud->path);
-			ft_putstr(")  =  ");
-			ft_putnbr(curnode->file_stat.st_mtime - new_bud->file_stat.st_mtime);
-			ft_putchar('\n');
-	*/		if (op->time_sort && ft_time_dif(curnode, new_bud) > 0)
+			if (op->time_sort && ft_time_dif(curnode, new_bud) > 0)
 			{
 				if (!curnode->left)
 				{
-	/*								ft_putstr(new_bud->path);
-									ft_putstr(" put in left of : ");
-									ft_putendl(curnode->path);
-									ft_putchar('\n');
-	*/				curnode->left = new_bud;
+					curnode->left = new_bud;
 					new_bud->relat = curnode;
 					curnode = curnode->left;
 				}
@@ -101,11 +73,7 @@ static void		ft_new_bud(t_direct *daddir, char *bud, t_opt *op)
 			{
 				if (!curnode->right)
 				{	
-	/*										ft_putstr(new_bud->path);
-											ft_putstr(" put in right of : ");
-											ft_putendl(curnode->path);
-											ft_putchar('\n');
-	*/				curnode->right = new_bud;
+					curnode->right = new_bud;
 					new_bud->relat = curnode;
 					curnode = curnode->right;
 				}
@@ -115,11 +83,7 @@ static void		ft_new_bud(t_direct *daddir, char *bud, t_opt *op)
 			{
 				if (!curnode->left)
 				{	
-	/*										ft_putstr(new_bud->path);
-											ft_putstr(" PUT in left of : ");
-											ft_putendl(curnode->path);
-											ft_putchar('\n');
-	*/				curnode->left = new_bud;
+					curnode->left = new_bud;
 					new_bud->relat = curnode;
 					curnode = curnode->left;
 				}
@@ -129,11 +93,7 @@ static void		ft_new_bud(t_direct *daddir, char *bud, t_opt *op)
 			{
 				if (!curnode->right)
 				{
-	/*										ft_putstr(new_bud->path);
-											ft_putstr(" PUT in right of : ");
-											ft_putendl(curnode->path);
-											ft_putchar('\n');
-	*/				curnode->right = new_bud;
+					curnode->right = new_bud;
 					new_bud->relat = curnode;
 					curnode = curnode->right;
 				}
