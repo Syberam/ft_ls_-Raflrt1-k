@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 18:15:06 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/02 05:44:41 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/03 00:17:27 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,19 @@ t_direct		*ft_display_tree(t_direct *node, t_direct *prev, t_direct *dad,
 	t_direct	*tmp;
 	t_direct	*right;
 
+	ft_putendl("LINE 62");
+
 	if (!node)
 		return (prev);
 	//ft_display_indir_node(node, dad, op);
 	if (node->left)
+	{
+		ft_putstr("le left de ");
+		ft_putstr(node->path);
+		ft_putstr(" :  ");
+		ft_putendl(node->left->path);
 		prev = ft_display_tree(prev, node->left, dad, op);
+	}
 	ft_display_indir_node(node, dad, op);
 	right = node->right;
 	//prev = (op->recurs) ? ft_put_in_direct_lst(prev, node, op) : prev;

@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 20:37:15 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/02 06:29:10 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/03 01:39:27 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,13 @@ static void		ft_to_display_file_infos(char *display_line, t_direct *cur,
 	size_t		j;
 
 	i = 0;
-	line_part = ft_itoa(cur->file_stat.st_size);
+	line_part = ft_size_or_minmaj(cur);
 	j = ft_strlen(display_line);
 	display_line[j] = ' ';
 	j += dad->size_field - ft_strlen(line_part) + 1;
 	while (line_part[++i - 1] && i < 256)
 		display_line[j + i - 1] = line_part[i - 1];
+	free(line_part);
 	line_part = ft_time_for_display(cur->file_stat, op);
 	j += i - 3;
 	i = 3;
