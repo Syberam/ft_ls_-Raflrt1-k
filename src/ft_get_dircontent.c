@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 22:52:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/03 21:25:11 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/05 04:03:23 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,28 @@ static void		ft_new_bud(t_direct *daddir, char *bud, t_opt *op)
 	}
 }
 
-t_opt			*ft_get_dircontent(t_direct *daddir, t_opt *op)
+char			ft_get_dircontent(t_direct *daddir, t_opt *op)
 {
 	DIR			*diropen;
 	t_dirent	*in;
 	char		*path;
 
-	if (!(diropen = opendir(daddir->path)))
-		return (op);
+	daddir->content = NULL;
 	daddir->ph_lnk = 0;
+	if (ft_permis_den(daddir))
+	{
+		ft_del_dir_in_directlst(daddir, op);
+		op->first_line = 1; //?????
+		return (0);
+	}
+	if (!(diropen = opendir(daddir->path)))
+		return (0);
 	while ((in = readdir(diropen)))
 	{
 		path = ft_write_path((char *)daddir->path, in->d_name);
 		op->opt_f ? ft_new_listree_elem(daddir, path, op)
 						: ft_new_bud(daddir, path, op);
 	}
-	return (op);
+	closedir(diropen);
+	return (1);
 }

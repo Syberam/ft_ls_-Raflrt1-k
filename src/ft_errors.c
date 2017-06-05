@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:18:48 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/05/31 01:02:34 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/04 07:03:13 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,13 @@ char		ft_permis_den(t_direct *dir)
 		closedir(current_dir);
 		return (0);
 	}
+	ft_putchar('\n');
+	ft_putstr(dir->path);
+	ft_putendl(":");
 	ft_putstr_fd("ft_ls: ", 2);
-	ft_strrchr(dir->path, '/') ? ft_putstr_fd(ft_strrchr(dir->path, '/') + 1, 2):
-								ft_putstr_fd(dir->path, 2);
+	ft_strrchr(dir->path, '/') ?
+			ft_putstr_fd(ft_strrchr(dir->path, '/') + 1, 2) :
+			ft_putstr_fd(dir->path, 2);
 	ft_putendl_fd(": Permission denied", 2);
 	return (1);
 }
@@ -70,6 +74,7 @@ void		ft_error_name(t_opt *options)
 
 	if (!options->wg_dir)
 		return ;
+	options->first_line = 1;
 	i = 0;
 	ft_sort_err(options);
 	while ((options->wg_dir)[i])

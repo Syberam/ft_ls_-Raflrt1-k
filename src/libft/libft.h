@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 10:21:08 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/05/19 23:43:49 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/04 19:03:53 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int					ft_tolower(int c);
 
 void				*ft_memalloc(size_t size);
 void				*ft_memset(void *s, int c, size_t n);
+void				ft_memdel(void **ap);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
 void				ft_striter(char *s, void (*f)(char *));
@@ -69,6 +70,7 @@ char				*ft_ext_strjoin_free(char const *s1, char const *s2,
 											size_t mal);
 char				*ft_strtrim(char const *s);
 char				*ft_itoa(int n);
+char				*ft_itoa_stack(int n);
 
 char				**ft_strsplit(char const *s, char c);
 

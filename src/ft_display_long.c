@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 20:37:15 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/03 04:34:05 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/05 03:59:53 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,30 +55,29 @@ static void		ft_to_display_chmod(char *display_line, t_direct *cur)
 static void		ft_to_display_file_infos(char *display_line, t_direct *cur,
 										t_direct *dad, t_opt *op)
 {
-	char		*line_part;
+	char		*lin;
 	size_t		i;
 	size_t		j;
 
 	i = 0;
-	line_part = ft_size_or_minmaj(cur);
+	lin = ft_size_or_minmaj(cur);
 	j = ft_strlen(display_line);
 	display_line[j] = ' ';
-	j += dad->size_field - ft_strlen(line_part) + 1;
-	while (line_part[++i - 1] && i < 256)
-		display_line[j + i - 1] = line_part[i - 1];
-	free(line_part);
-	line_part = ft_time_for_display(cur->file_stat, op);
+	j += (dad->size_field - ft_strlen(lin) + 1);
+	while (lin[++i - 1] && i < 256)
+		display_line[j + i - 1] = lin[i - 1];
+	free(lin);
+	lin = ft_time_for_display(cur->file_stat, op);
 	j += i - 3;
 	i = 3;
-	while (line_part[++i])
-		display_line[j + i - 1] = line_part[i - 1];
+	while (lin[++i])
+		display_line[j + i - 1] = lin[i - 1];
 	j += i;
 	i = 0;
-	line_part = (char *)((ft_strrchr(cur->path, '/') != 0
-										&& dad != op->arg_file) ?
-			ft_strrchr(cur->path, '/') + 1 : cur->path);
-	while (line_part[++i - 1])
-		display_line[j + i] = line_part[i - 1];
+	lin = (char *)((ft_strrchr(cur->path, '/') != 0 && dad != op->arg_file) ?
+							ft_strrchr(cur->path, '/') + 1 : cur->path);
+	while (lin[++i - 1])
+		display_line[j + i] = lin[i - 1];
 	display_line[j + i] = (!S_ISLNK(cur->file_stat.st_mode)) ? '\n' : 0;
 	display_line[j + i + 1] = 0;
 }
@@ -86,29 +85,29 @@ static void		ft_to_display_file_infos(char *display_line, t_direct *cur,
 static void		ft_to_display_user_infos(char *display_line, t_direct *cur,
 											t_direct *dad, t_opt *op)
 {
-	char		*line_part;
+	char		*lin;
 	size_t		i;
 	size_t		j;
 
 	j = 0;
-	line_part = ft_itoa((int)cur->file_stat.st_nlink);
-	i = (dad->lnk_field) - (size_t)ft_strlen(line_part);
-	while (line_part[++j - 1])
-		display_line[j + i] = line_part[j - 1];
-	line_part = (getpwuid(cur->file_stat.st_uid)) ?
+	lin = ft_itoa_stack((int)cur->file_stat.st_nlink);
+	i = (dad->lnk_field) - (size_t)ft_strlen(lin);
+	while (lin[++j - 1])
+		display_line[j + i] = lin[j - 1];
+	lin = (getpwuid(cur->file_stat.st_uid)) ?
 					(getpwuid(cur->file_stat.st_uid))->pw_name :
 						ft_itoa(cur->file_stat.st_uid);
-	i += j + dad->usr_field - (size_t)ft_strlen(line_part);
+	i += j + dad->usr_field - (size_t)ft_strlen(lin);
 	j = 0;
-	while ((line_part)[++j - 1])
-		display_line[i + j] = (line_part)[j - 1];
-	line_part = (getgrgid(cur->file_stat.st_gid)) ?
+	while ((lin)[++j - 1])
+		display_line[i + j] = (lin)[j - 1];
+	lin = (getgrgid(cur->file_stat.st_gid)) ?
 					(getgrgid(cur->file_stat.st_gid))->gr_name :
 						ft_itoa(cur->file_stat.st_gid);
 	i = (i + j);
 	j = 0;
-	while ((line_part)[++j - 1])
-		display_line[i + j] = (line_part)[j - 1];
+	while ((lin)[++j - 1])
+		display_line[i + j] = (lin)[j - 1];
 	display_line[i + (dad->grp_field) + 1] = 0;
 	ft_to_display_file_infos(display_line, cur, dad, op);
 }
@@ -116,7 +115,7 @@ static void		ft_to_display_user_infos(char *display_line, t_direct *cur,
 void			ft_display_long(t_direct *elem, t_direct *dad, t_opt *opt)
 {
 	char		*display_line;
-	char		buflnk[255];
+	char		buflnk[256];
 	size_t		i;
 
 	display_line = (char *)ft_memalloc(sizeof(char) * 800);
@@ -127,9 +126,9 @@ void			ft_display_long(t_direct *elem, t_direct *dad, t_opt *opt)
 	ft_to_display_chmod(display_line, elem);
 	ft_to_display_user_infos(display_line + 11, elem, dad, opt);
 	ft_putstr(display_line);
-	ft_bzero(buflnk, 255);
+	ft_bzero(buflnk, 256);
 	if (S_ISLNK(elem->file_stat.st_mode)
-			&& readlink((elem->path), buflnk, 255))
+			&& readlink((elem->path), buflnk, 256))
 	{
 		ft_putstr(" -> ");
 		ft_putendl(buflnk);

@@ -6,13 +6,14 @@
 #    By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/10 18:28:41 by sbonnefo          #+#    #+#              #
-#    Updated: 2017/05/30 23:09:16 by sbonnefo         ###   ########.fr        #
+#    Updated: 2017/06/04 19:06:17 by sbonnefo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
 SRC = ft_itoa.c \
+		ft_itoa_stack.c \
 		ft_putendl.c \
 		ft_strcmp.c \
 		ft_strmap.c \
@@ -57,6 +58,7 @@ SRC = ft_itoa.c \
 		ft_strrchr.c \
 		ft_strrccpy.c \
 		ft_memset.c \
+		ft_memdel.c \
 		ft_strccpy.c \
 		ft_atoi_base.c
 

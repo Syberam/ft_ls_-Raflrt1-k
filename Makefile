@@ -6,7 +6,7 @@
 #    By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/10 18:28:41 by sbonnefo          #+#    #+#              #
-#    Updated: 2017/06/01 01:04:44 by sbonnefo         ###   ########.fr        #
+#    Updated: 2017/06/04 02:47:16 by sbonnefo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC =	$(addprefix $(SRC_PATH)/, main.c \
 		ft_display_tree.c \
 		ft_display_argfiles.c \
 		time_tools.c \
+		tool_for_recurs.c \
 		ft_path_tools.c \
 		ft_errors.c \
 		stock_wgdir.c \

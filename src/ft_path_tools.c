@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 16:49:08 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/01 20:33:08 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/04 04:41:12 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char		*ft_write_path(char *dad, char *child)
 	if (dad && dad[ft_strlen(dad) - 1] != '/')
 	{
 		path = ft_ext_strjoin_free(dad, "/\0", 0);
-		path = ft_ext_strjoin_free(path, child, 0);
+		path = ft_ext_strjoin_free(path, child, 1);
 	}
 	else
 		path = ft_ext_strjoin_free(dad, child, 0);

@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 11:56:34 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/03 05:17:27 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/04 07:03:31 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ typedef struct				s_opt
 	char					*display;
 	char					first_line;
 	t_direct				*first_d;
+	t_direct				*tmp_first_d;
 	t_direct				*arg_file;
 }							t_opt;
-
 
 /*
 **				PARSING
@@ -77,8 +77,6 @@ typedef struct				s_opt
 
 t_opt						*ft_get_opt(char **argv);
 t_opt						*ft_wrg_dir(t_opt *options, char *new_wrg);
-
-
 
 /*
 **				DISPLAY
@@ -91,10 +89,8 @@ void						ft_fields_size(t_direct *dir, t_direct *direlem);
 char						*ft_time_for_display(t_stat stat_file, t_opt *ops);
 char						*ft_size_or_minmaj(t_direct *cur);
 void						ft_display_dircontent(t_direct *dir, t_opt *op);
-void						ft_display_tree(t_direct *node, t_direct *prev,
-													t_direct *dad, t_opt *op);
-t_direct					*ft_display_tree_r(t_direct *node, t_direct *prev,
-													t_direct *dad, t_opt *op);
+void						ft_display_tree(t_direct *node, t_direct *dad,
+																	t_opt *op);
 void						ft_display_indir_node(t_direct *node, t_direct *dad,
 													t_opt *op);
 t_direct					*ft_put_in_direct_lst(t_direct *prev, t_direct *new,
@@ -108,14 +104,16 @@ char						*ft_write_path(char *dad, char *child);
 int							ft_time_dif(t_direct *bef, t_direct *aft);
 t_opt						*ft_args_to_direct_lsts(t_opt *op);
 void						ft_init_root(t_opt *options, size_t i);
-t_opt						*ft_get_dircontent(t_direct *daddir, t_opt *op);
-
+char						ft_get_dircontent(t_direct *daddir, t_opt *op);
+void						ft_del_dir_in_directlst(t_direct *dir, t_opt *op);
+void						ft_confirm_tmp_first_d(t_opt *op);
 
 /*
 **				FREE
 */
 
 void						ft_free_tab_str(char **strs);
+void						ft_free_tmp_first_d(t_opt *op);
 
 /*
 **				ERRORS
@@ -123,7 +121,7 @@ void						ft_free_tab_str(char **strs);
 
 int							ft_error_ill_option(char first_ill);
 
-char						ft_permis_den(t_direct *di);
+char						ft_permis_den(t_direct *dir);
 char						ft_error_empty_arg(int argc, char **argv);
 
 void						ft_error_name(t_opt *options);
