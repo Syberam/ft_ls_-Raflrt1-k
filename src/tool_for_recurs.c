@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/04 01:46:35 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/06 06:48:59 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/06 08:29:27 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void			ft_confirm_tmp_first_d(t_opt *op)
 					!strcmp(strrchr(cur->path, '/') + 1, "..\0") ||
 						(strrchr(cur->path, '/')[1] == '.' && !op->all))
 			ft_del_elem_from_lst(prev, cur, op);
-		else 
-			prev = cur;	
+		else
+			prev = cur;
 		cur = tmp;
 	}
 	cur = op->tmp_first_d;

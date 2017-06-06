@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 22:52:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/06 06:01:05 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/06 09:27:50 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,7 @@ char			ft_get_dircontent(t_direct *daddir, t_opt *op)
 	daddir->ph_lnk = 0;
 	if (ft_permis_den(daddir))
 	{
-		ft_del_dir_in_directlst(daddir, op);
-		op->first_line = 1; //?????
+		op->first_line = 1;
 		return (0);
 	}
 	if (!(diropen = opendir(daddir->path)))
