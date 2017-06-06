@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 23:14:40 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/05 04:22:50 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/06 04:34:29 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void			ft_display_dircontent(t_direct *dir, t_opt *op)
 		ft_putendl(":");
 	}
 	op->first_line = 1;
-	if (!(dir->content || (!op->all && !dir->content->next->next->next)))
+	if (!(dir->content))
 	{
 		ft_del_dir_in_directlst(dir, op);
 		return (ft_putchar('\n'));
@@ -94,7 +94,8 @@ void			ft_display_dircontent(t_direct *dir, t_opt *op)
 		ft_putchar('\n');
 	}
 	lin = dir->content;
-	(!op->opt_f) ? ft_display_tree(lin, dir, op) : ft_display_lst(lin, dir, op);
+	(!op->opt_f)
+		? ft_display_tree(lin, dir, op) : ft_display_lst(lin, dir, op);
 	if (!op->opt_f)
 		op->recurs ? ft_confirm_tmp_first_d(op) : ft_free_tmp_first_d(op);
 	ft_del_dir_in_directlst(dir, op);
