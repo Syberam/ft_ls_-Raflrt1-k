@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 17:21:48 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/03 01:37:38 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/06 04:57:43 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*ft_time_for_display(t_stat stat_file, t_opt *options)
 	if (options->big_t)
 		return (line);
 	lstat("./ft_ls", &stat_ref);
-	if (stat_ref.st_mtime - stat_file.st_mtime > 15552000)
+	if (stat_ref.st_mtime - stat_file.st_mtime > 15552000 ||
+			stat_ref.st_mtime - stat_file.st_mtime < 0)
 	{
 		i = 11;
 		line[i] = ' ';

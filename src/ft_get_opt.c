@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:58:01 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/03 06:45:12 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/06 04:54:19 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static size_t		ft_active_opt_ii(char opt, t_opt *opts)
 		opts->col = 1;
 		opts->long_format = 0;
 	}
+	else if (opt == 'T')
+		opts->big_t = 1;
 	else
 	{
 		opts->err = opt;
@@ -46,7 +48,10 @@ static size_t		ft_active_opt_i(char opt, t_opt *opts)
 	else if (opt == 'a')
 		opts->all = 1;
 	else if (opt == 'l')
+	{
 		opts->long_format = 1;
+		opts->col = 0;
+	}
 	else if (opt == 'r')
 		opts->reverse = 1;
 	else if (opt == 't')
@@ -59,8 +64,6 @@ static size_t		ft_active_opt_i(char opt, t_opt *opts)
 	}
 	else if (opt == 'k')
 		opts->opt_k = 1;
-	else if (opt == 'T')
-		opts->big_t = 1;
 	else
 		return (ft_active_opt_ii(opt, opts));
 	return (1);
