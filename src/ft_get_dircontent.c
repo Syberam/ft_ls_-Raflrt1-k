@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 22:52:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/06 09:27:50 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/06 13:53:55 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,8 @@ static void		ft_new_bud(t_direct *daddir, char *bud, t_opt *op)
 		ft_fields_size(daddir, new_bud);
 	if (!daddir->content)
 		daddir->content = new_bud;
-	else
+	else if ((curnode = daddir->content))
 	{
-		curnode = daddir->content;
 		while (curnode)
 		{
 			if (op->time_sort && ft_time_dif(curnode, new_bud) > 0)
@@ -107,11 +106,12 @@ char			ft_get_dircontent(t_direct *daddir, t_opt *op)
 
 	daddir->content = NULL;
 	daddir->ph_lnk = 0;
-	if (ft_permis_den(daddir))
+	if (ft_permis_den(daddir, op))
 	{
 		op->first_line = 1;
 		return (0);
 	}
+	daddir->content = NULL;
 	if (!(diropen = opendir(daddir->path)))
 		return (0);
 	while ((in = readdir(diropen)))

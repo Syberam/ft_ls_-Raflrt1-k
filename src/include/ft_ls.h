@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 11:56:34 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/06 06:56:02 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/06 14:01:31 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct				s_opt
 	char					opt_k;
 	char					col;
 	char					err;
+	char					perm;
 	char					**av_dir;
 	char					**wg_dir;
 	char					*display;
@@ -106,7 +107,8 @@ int							ft_time_dif(t_direct *bef, t_direct *aft);
 t_opt						*ft_args_to_direct_lsts(t_opt *op);
 void						ft_init_root(t_opt *options, size_t i);
 char						ft_get_dircontent(t_direct *daddir, t_opt *op);
-void						ft_del_dir_in_directlst(t_direct *dir, t_opt *op);
+void						ft_del_dir_in_directlst(t_direct *dir, t_opt *op,
+														char key);
 void						ft_confirm_tmp_first_d(t_opt *op);
 int							ft_count_tree_elem(t_direct *node, t_opt *op);
 
@@ -123,7 +125,7 @@ void						ft_free_tmp_first_d(t_opt *op);
 
 int							ft_error_ill_option(char first_ill);
 
-char						ft_permis_den(t_direct *dir);
+char						ft_permis_den(t_direct *dir, t_opt *op);
 char						ft_error_empty_arg(int argc, char **argv);
 
 void						ft_error_name(t_opt *options);

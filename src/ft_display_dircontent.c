@@ -6,15 +6,16 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 23:14:40 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/06 08:27:52 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/06 14:05:52 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/ft_ls.h"
 
-void			ft_del_dir_in_directlst(t_direct *dir, t_opt *op)
+void			ft_del_dir_in_directlst(t_direct *dir, t_opt *op, char key)
 {
-	op->first_d = dir->next;
+	if (!key)
+		op->first_d = dir->next;
 	ft_bzero((void *)dir->path, sizeof(dir->path));
 	free((void *)dir->path);
 	free((void *)dir);
@@ -62,21 +63,16 @@ static void		ft_display_lst(t_direct *item, t_direct *dad, t_opt *op)
 				free(current);
 		}
 		else
-		{
-			free((void *)current->path);
-			free(current);
-		}
+			ft_del_dir_in_directlst(current, op, 1);
 		current = tmp;
 	}
 }
 
 void			ft_display_dircontent(t_direct *dir, t_opt *op)
 {
-	t_direct	*lin;
-
 	if (!dir)
 		return ;
-	if (op && op->first_line == 1)
+	if (op && op->first_line == 1 && !op->perm)
 	{
 		ft_putchar('\n');
 		ft_putstr(dir->path);
@@ -84,16 +80,12 @@ void			ft_display_dircontent(t_direct *dir, t_opt *op)
 	}
 	op->first_line = 1;
 	if (!(dir->content))
-	{
-		ft_del_dir_in_directlst(dir, op);
-		return (ft_putchar('\n'));
-	}
-	lin = dir->content;
-	if (ft_count_tree_elem(lin, op) > 0)
-		ft_print_total(dir, op);
+		return (ft_del_dir_in_directlst(dir, op, 0));
+	ft_print_total(dir, op);
 	(!op->opt_f)
-		? ft_display_tree(lin, dir, op) : ft_display_lst(lin, dir, op);
+		? ft_display_tree(dir->content, dir, op) :
+			ft_display_lst(dir->content, dir, op);
 	if (!op->opt_f)
 		op->recurs ? ft_confirm_tmp_first_d(op) : ft_free_tmp_first_d(op);
-	ft_del_dir_in_directlst(dir, op);
+	ft_del_dir_in_directlst(dir, op, 0);
 }

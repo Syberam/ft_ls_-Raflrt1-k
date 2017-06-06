@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/04 01:46:35 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/06 08:29:27 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/06 13:48:54 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			ft_free_tmp_first_d(t_opt *op)
 }
 
 void			ft_del_elem_from_lst(t_direct *prev, t_direct *elem, t_opt *op)
-{	
+{
 	if (!prev)
 		op->tmp_first_d = elem->next;
 	else
@@ -54,9 +54,8 @@ void			ft_confirm_tmp_first_d(t_opt *op)
 	{
 		tmp = cur->next;
 		if (!S_ISDIR(cur->file_stat.st_mode) ||
-				!strcmp(strrchr(cur->path, '/') + 1, ".\0") ||
-					!strcmp(strrchr(cur->path, '/') + 1, "..\0") ||
-						(strrchr(cur->path, '/')[1] == '.' && !op->all))
+!strcmp(strrchr(cur->path, '/') + 1, ".\0") || !strcmp(strrchr(cur->path, '/')
+	+ 1, "..\0") || (strrchr(cur->path, '/')[1] == '.' && !op->all))
 			ft_del_elem_from_lst(prev, cur, op);
 		else
 			prev = cur;

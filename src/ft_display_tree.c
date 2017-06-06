@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 18:15:06 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/06 07:47:10 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/06 13:56:08 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void			ft_display_indir_node(t_direct *no, t_direct *dad, t_opt *op)
 		ft_display_long(no, dad, op);
 }
 
-int		ft_count_tree_elem(t_direct *no, t_opt *op)
+int				ft_count_tree_elem(t_direct *no, t_opt *op)
 {
-	int	nb;
+	int			nb;
 
 	nb = 0;
 	if (!no)
@@ -48,7 +48,7 @@ int		ft_count_tree_elem(t_direct *no, t_opt *op)
 	if (no->left)
 		nb += ft_count_tree_elem(no->left, op);
 	if ((!op->all && ft_strrchr(no->path, '/')[1] != '.') || op->all)
-			nb++;
+		nb++;
 	if (no->right)
 		nb += ft_count_tree_elem(no->right, op);
 	return (nb);

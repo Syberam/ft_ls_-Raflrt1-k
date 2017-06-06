@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/17 23:49:53 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/06 06:02:13 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/06 13:50:06 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char		*ft_size_or_minmaj(t_direct *cur)
 {
-	char	*min_maj = NULL;
+	char	*min_maj;
 	char	*line;
 	char	*spaces;
 	int		sp;
@@ -35,15 +35,20 @@ char		*ft_size_or_minmaj(t_direct *cur)
 
 void		ft_print_total(t_direct *dir, t_opt *op)
 {
-	if (op && op->long_format)
+	if (ft_count_tree_elem(dir->content, op))
 	{
-		ft_putstr("total ");
-		if (op->opt_k)
-			ft_putnbr(dir->ph_lnk - (dir->ph_lnk / 2));
-		else
-			ft_putnbr(dir->ph_lnk);
-		ft_putchar('\n');
+		if (op && op->long_format)
+		{
+			ft_putstr("total ");
+			if (op->opt_k)
+				ft_putnbr(dir->ph_lnk - (dir->ph_lnk / 2));
+			else
+				ft_putnbr(dir->ph_lnk);
+			ft_putchar('\n');
+		}
 	}
+	else
+		ft_putchar('\n');
 }
 
 void		ft_fields_size(t_direct *dad, t_direct *cur)
