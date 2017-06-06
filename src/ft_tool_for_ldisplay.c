@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/17 23:49:53 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/05 03:53:49 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/06 05:54:55 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@ char		*ft_size_or_minmaj(t_direct *cur)
 	line = ft_ext_strjoin_free(line, spaces + sp, 1);
 	line = ft_ext_strjoin_free(line, min_maj, 3);
 	return (line);
+}
+
+void		ft_print_total(t_direct *dir, t_opt *op)
+{
+	if (op && op->long_format)
+	{
+		ft_putstr("total ");
+		if (op->opt_k)
+			ft_putnbr(dir->ph_lnk - (dir->ph_lnk / 2));
+		else
+			ft_putnbr(dir->ph_lnk);
+		ft_putchar('\n');
+	}
 }
 
 void		ft_fields_size(t_direct *dad, t_direct *cur)

@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 22:52:47 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/05 04:03:23 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/06 05:47:27 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ static void		ft_new_bud(t_direct *daddir, char *bud, t_opt *op)
 	if (!bud)
 		return ;
 	new_bud = ft_init_new_bud(bud);
-	if (op->long_format)
+	if (op->long_format && ((ft_strrchr(new_bud->path, '/')[1] != '.')
+			|| (ft_strrchr(bud, '/')[1] == '.' && (op->all || op->opt_f))))
 		ft_fields_size(daddir, new_bud);
 	if (!daddir->content)
 		daddir->content = new_bud;
