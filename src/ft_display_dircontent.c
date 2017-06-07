@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 23:14:40 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/06 14:05:52 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/07 13:29:28 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,12 @@ void			ft_display_dircontent(t_direct *dir, t_opt *op)
 			ft_display_lst(dir->content, dir, op);
 	if (!op->opt_f)
 		op->recurs ? ft_confirm_tmp_first_d(op) : ft_free_tmp_first_d(op);
+	if (((dir->file_stat.st_mode & S_IXUSR) != S_IXUSR) && op->recurs)
+	{
+		ft_putstr_fd("ft_ls: ", 2);
+		ft_strrchr(dir->path, '/') ?
+ft_putstr_fd(ft_strrchr(dir->path, '/') + 1, 2) : ft_putstr_fd(dir->path, 2);
+		ft_putendl_fd(": Permission denied", 2);
+	}
 	ft_del_dir_in_directlst(dir, op, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 11:56:34 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/06 14:01:31 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/07 12:59:42 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,8 @@ void						ft_free_tmp_first_d(t_opt *op);
 
 int							ft_error_ill_option(char first_ill);
 
-char						ft_permis_den(t_direct *dir, t_opt *op);
+char						ft_permis_den(t_direct *dir, t_opt *op,
+															char header);
 char						ft_error_empty_arg(int argc, char **argv);
 
 void						ft_error_name(t_opt *options);

@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 18:18:48 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/06 13:51:43 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/07 13:26:22 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,23 @@ int			ft_error_ill_option(char first_ill)
 	return (0);
 }
 
-char		ft_permis_den(t_direct *dir, t_opt *op)
+char		ft_permis_den(t_direct *dir, t_opt *op, char header)
 {
 	DIR		*current_dir;
 
-	if ((current_dir = opendir(dir->path)))
-		closedir(current_dir);
-	if ((current_dir = opendir(dir->path)))
+	if ((current_dir = opendir(dir->path)) && header)
 	{
 		closedir(current_dir);
 		op->perm = 0;
 		return (0);
 	}
 	op->perm = 1;
-	ft_putchar('\n');
-	ft_putstr(dir->path);
-	ft_putendl(":");
+	if (header)
+	{
+		ft_putchar('\n');
+		ft_putstr(dir->path);
+		ft_putendl(":");
+	}
 	ft_putstr_fd("ft_ls: ", 2);
 	ft_strrchr(dir->path, '/') ?
 			ft_putstr_fd(ft_strrchr(dir->path, '/') + 1, 2) :

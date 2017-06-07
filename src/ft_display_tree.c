@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 18:15:06 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/06 13:56:08 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/07 13:15:48 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void			ft_display_indir_node(t_direct *no, t_direct *dad, t_opt *op)
 	}
 	if ((strrchr(no->path, '/'))[1] == '.' && !op->all)
 		return ;
-	if (op && op->col)
+	if ((dad->file_stat.st_mode & S_IXUSR) != S_IXUSR)
+		ft_permis_den(no, op, 0);
+	else if (op && op->col)
 		ft_putendl(ft_strrchr(no->path, '/') + 1);
 	else if (op && !op->long_format)
 	{
@@ -54,30 +56,32 @@ int				ft_count_tree_elem(t_direct *no, t_opt *op)
 	return (nb);
 }
 
-static void		ft_display_tree_rev(t_direct *no, t_direct *dad, t_opt *op)
+static void		ft_display_tree_(t_direct *no, t_direct *dad, t_opt *op,
+																	char size)
 {
 	if (!no)
 		return ;
-	if (no->right)
-		ft_display_tree(no->right, dad, op);
-	ft_display_indir_node(no, dad, op);
-	if (no->left)
-		ft_display_tree(no->left, dad, op);
-}
-
-static void		ft_display_tree_(t_direct *no, t_direct *dad, t_opt *op)
-{
-	if (!no)
-		return ;
-	if (no->left)
-		ft_display_tree(no->left, dad, op);
-	ft_display_indir_node(no, dad, op);
-	if (no->right)
-		ft_display_tree(no->right, dad, op);
+	if (size == 'l')
+	{
+		if (no->left)
+			ft_display_tree(no->left, dad, op);
+		ft_display_indir_node(no, dad, op);
+		if (no->right)
+			ft_display_tree(no->right, dad, op);
+	}
+	else
+	{
+		if (no->right)
+			ft_display_tree(no->right, dad, op);
+		ft_display_indir_node(no, dad, op);
+		if (no->left)
+			ft_display_tree(no->left, dad, op);
+	}
 }
 
 void			ft_display_tree(t_direct *no, t_direct *dad, t_opt *op)
 {
-	op->reverse ? ft_display_tree_rev(no, dad, op) :
-					ft_display_tree_(no, dad, op);
+	(op->reverse && ((dad->file_stat.st_mode & S_IXUSR) == S_IXUSR)) ?
+		ft_display_tree_(no, dad, op, 'r') :
+		ft_display_tree_(no, dad, op, 'l');
 }

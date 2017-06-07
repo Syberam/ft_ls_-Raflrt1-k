@@ -6,7 +6,7 @@
 /*   By: sbonnefo <sbonnefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/17 23:49:53 by sbonnefo          #+#    #+#             */
-/*   Updated: 2017/06/06 13:50:06 by sbonnefo         ###   ########.fr       */
+/*   Updated: 2017/06/07 13:00:14 by sbonnefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char		*ft_size_or_minmaj(t_direct *cur)
 
 void		ft_print_total(t_direct *dir, t_opt *op)
 {
+	if ((dir->file_stat.st_mode & S_IXUSR) != S_IXUSR)
+		return ;
 	if (ft_count_tree_elem(dir->content, op))
 	{
 		if (op && op->long_format)
