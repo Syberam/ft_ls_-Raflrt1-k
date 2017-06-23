@@ -1,2 +1,2 @@
 # ft_ls
-ls builtin with simple options -Ralrt
+ls builtin with simple options -Raflrt1 (+ simplified -k with -l)
